@@ -13,6 +13,21 @@ import java.util.Objects;
 /**
  * This is a Eclipse Custom toString Builder class, which help to generate toString method to return a JSON formatted string.
  * 
+ * Configure this Custom toString Builder in Eclipse using following steps
+ * open eclipse dialog by navigating:- Source and then Generate toString()...   
+ * choose whatever fields you want to be included in the toString method.
+ * significant point here is, choose "custom toString() builder" in the code style drop down and click on "configure"
+ * 	provide inputs 
+ * 		Builder class - as JsonToStringBuilder
+ * 		Builder Name - can be you own name
+ * 		Append Method - as append
+ * 		Result Method - can be either build/toString
+ * 		Optionally : tick chained function if you like to have fluent model. 
+ * caveat 		 
+ * don't tick Skip null values, 
+ * list content of array instead of native toString.
+ * 
+ * 
  * References:-
  * http://help.eclipse.org/kepler/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Freference%2Fref-tostring-styles.htm
  * https://gist.github.com/ulisseslima/7de22e06f85846594a1bd6ffff79b0da
@@ -30,9 +45,10 @@ public class JsonToStringBuilder {
     /**
      * This append method prepares the a Key and Value element in the JSON for input of fieldName
      * and fieldValue
-     * @param fieldName
-     * @param fieldValue
-     * @return this
+     * 
+     * @param fieldName  - Json Key 
+     * @param fieldValue - Json value
+     * @return this -- returns Custom toString Builder
      */
     public JsonToStringBuilder append(final String fieldName, final Object fieldValue) {
         aJson.append(aJson.length() == 0 ? "" : ",").append("\"").append(fieldName).append("\": ").append(new ValueSerializer(fieldValue).serialize());
